@@ -1,0 +1,138 @@
+(include "./dashboard/eww.yuck")
+(include "img.yuck")
+
+;; ** Variables ***********************************************************************
+(defvar eww "eww -c $HOME/.config/eww")
+(defvar space 20)
+(defvar TOGGLE_SIDEBAR "./toggle_dashboard &")
+
+(defpoll TIME :interval "5s" `date +\'%I:%M %p\'`)
+(defpoll DATE :interval "5s" `date +\'%A, %B %d\'`)
+
+(defpoll WORKSPACES :interval "1s" `python scripts/bar/workspaces.py`)
+
+;; Mail vars
+(defpoll MAILS :interval "1m" `python scripts/bar/mails.py`)
+
+;; Volume vars
+(defpoll VOLICON :interval "2s" `scripts/bar/volume --icon`)
+(defpoll VOLUME :interval "1s" `scripts/bar/volume --get`)
+
+
+;; ** Widgets *************************************************************************
+
+;; workspaces
+(defwidget workspaces [] 
+		(box :class "dockbox" :style "padding: 0 10px 0 10px"
+            (literal :content WORKSPACES)))
+
+;; clock
+(defwidget clock [] 
+		(box :class "dockbox"
+			(box :orientation "v"  :valign "center" :halign "center" :space-evenly "false"
+				(label :class "time" :text TIME)
+				(label :class "time" :text DATE))
+			))
+
+;;launcher
+(defwidget launcher []
+    (box :class "dockbox" 
+        (button :halign "center" :class "icon_large" :onclick TOGGLE_SIDEBAR :style "background-image: url('${img_dashboard}');")))
+
+;; system
+(defwidget system [] 
+		(box 
+			(box :class "dockbox" :space-evenly "true"   :halign "center" :spacing space :style "padding: 0 12px 0 16px"
+				(button :onclick "scripts/bar/widget_apps --ml"
+					(box 
+						(box :style "background-image: url('${img_mail}');" :class "icon_large")
+                        (label :class "infotext" :halign "start" :text MAILS)
+                    ))
+				(button :onclick "scripts/bar/volume --inc"
+                        :onmiddleclick "scripts/bar/volume --toggle"
+                        :onrightclick "scripts/bar/volume --dec"
+					(box 
+						(image :image-width 24 :path {(VOLUME ?: 0) < 10 ? img_audio_low : (VOLUME < 60 ? img_audio_medium : img_audio_high) } )
+                        (label :class "infotext" :halign "start" :text VOLUME)
+                    ))
+            )))
+;; controls
+(defwidget controls []
+    (box :class "dockbox"
+        (box  :spacing space  :halign "center" 
+            (button :onclick "scripts/bar/window_controls --max" :style "background-image: url('${img_fullscreen}');" :class "icon_large")
+            (button :onclick "scripts/bar/window_controls --rm"  :style "background-image: url('${img_close}');" :class "icon_large")
+        )))
+
+;;; ** Windows *************************************************************************
+
+;; workspace
+(defwindow workspaces
+           :monitor 0
+           :geometry (geometry :x "300px"
+                               :y "0px"
+                               :width "180px"
+                               :height "40px"
+                               :anchor "top left")
+           :stacking "fg"
+           :reserve (struts :distance "25px" :side "top")
+           :windowtype "dock"
+           :wm-ignore false
+(workspaces))
+
+;; clock
+(defwindow clock
+           :monitor 0
+           :geometry (geometry :x "40px"
+                               :y "0px"
+                               :width "200px"
+                               :height "40px"
+                               :anchor "top left")
+           :stacking "fg"
+           :reserve (struts :distance "25px" :side "top")
+           :windowtype "dock"
+           :wm-ignore false
+(clock))
+
+;; system
+(defwindow system
+           :monitor 0
+           :geometry (geometry :x "-200px"
+                                :y "0px"
+                               :width "280px"
+                               :height "40px"
+                               :anchor "top right")
+           :stacking "fg"
+           :reserve (struts :distance "25px" :side "top")
+           :windowtype "dock"
+           :wm-ignore false
+(system))
+
+;; launcher
+(defwindow launcher
+    :monitor 0
+    :geometry (geometry :x "0px"
+                            :y "0px"
+                        :width "80px"
+                        :height "40px"
+                        :anchor "top center")
+    :stacking "fg"
+    :reserve (struts :distance "25px" :side "top")
+    :windowtype "dock"
+    :wm-ignore false
+(launcher))
+
+;; window control
+(defwindow controls
+    :monitor 0
+    :geometry (geometry :x "-40px"
+                        :y "0px"
+                        :width "120px"
+                        :height "40px"
+                        :anchor "top right")
+    :stacking "fg"
+    :reserve (struts :distance "35px" :side "top")
+    :windowtype "dock"
+    :wm-ignore false
+(controls))
+

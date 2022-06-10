@@ -1,0 +1,271 @@
+
+;****BONSAI****
+(defvar img_bonsai "dashboard/bonsai.png")
+
+;****WEATHER****
+(defpoll WEATHER :interval "5s" "python scripts/dashboard/weather.py Marburg" )
+
+;****MUSIC****
+(defpoll SONGPOSITION :interval "1s" `playerctl metadata --format "{{ position }}"`)
+(defpoll SONGLENGTH :interval "5s" `playerctl metadata --format "{{ mpris:length }}"`)
+(defpoll SONGSTATUS :interval "1s" `playerctl status`)
+(defpoll SONGTITLE :interval "1s" `playerctl metadata title`)
+
+;****VARS****;
+(defvar FOLDER "[]")
+(defpoll ACTIVEHOUR :interval "10s" `uptime -p | awk  '{print $2}'`)
+(defpoll ACTIVEMIN :interval "10s" `uptime -p | awk  '{print $4}'`)
+(defpoll FORTUNE :interval "10m" `python scripts/dashboard/fortune.py`)
+(defvar TOGGLE_SIDEBAR "./toggle_dashboard &")
+
+;****WIDGETS****;
+(defwidget folderview [] 
+        (box :class "bgcolor0 area" :orientation "v" :space-evenly "false"  :spacing space 
+        (label :class "font_color font_large header" :text "FOLDER")
+        (box :height 50 
+            (button :class "iconlauncher" :onclick `scripts/dashboard/folder.py "~/rust"` :style "background-image: url('${img_rust}');")
+            (button :class "iconlauncher" :onclick `scripts/dashboard/folder.py "~/python"` :style "background-image: url('${img_python}');")
+            (button :class "iconlauncher" :onclick `scripts/dashboard/folder.py "~/dotfiles"` :style "background-image: url('${img_config}');"))
+        (box :orientation "v" :spacing {space / 2} :space-evenly "false"
+        (for f in FOLDER
+            (folder :name {f[0]} :path {f[1]})
+        ))))
+
+
+(defwidget folder [name ?path]
+    (box 
+        (button :class "button_hover" :onclick "xdg-open ${path} & ${TOGGLE_SIDEBAR}"
+            (label :class "font_color font_large folder" :text {name}))
+    ))
+
+(defwidget bonsaiview [] 
+    (box :class "bgcolor2 area"
+    (image :class "darkend area_round1" :path "${img_bonsai}" :image-width 320 :image-height 320)))
+
+(defwidget fortune [] 
+    (box :class "area bgcolor1" 
+        (label :class "font_color font_small" :wrap true :text FORTUNE)
+    ))
+
+(defwidget music [] 
+    (box :class "bgcolor1 area" 
+        (box :orientation "v" :space-evenly false :valign "start" :vexpand "false" :hexpand "false" 
+            (label :class "lightend area font_small font_color" :limit-width 40 :style "margin-bottom: 10px;":height 100 :valign "start"  :text {SONGTITLE ?: "-"} :wrap true)
+            (centerbox :height 15
+                (button :class "button_hover" :onclick "playerctl previous"
+                    (image :class "play" :image-width 40 :image-height 40 :path "${img_play_prev}"))
+                (button :class "round_button" :onclick "playerctl play-pause"
+                    (image  :class "play lightend " :image-width 40 :image-height 40 :path  {SONGSTATUS == "Playing" ? img_pause : img_play}))
+                (button :class "button_hover" :onclick "playerctl next"
+                    (image :image-width 40 :path "${img_play_next}"))
+            )
+                (box :class "music_bar"   :vexpand "false" :hexpand "false" 
+                    (scale :min 0 :max {SONGLENGTH ?: 1000000} :active false :value {SONGPOSITION ?: 0}))
+        )
+    ))
+
+(defwidget search [] 
+    (box :class "bgcolor2 area_round2"
+        (button :class "round_button" :onclick "rofi -show drun & ${TOGGLE_SIDEBAR}"
+            (image :path img_search :image-width 50))
+    ))
+
+(defwidget weather [] 
+    (box :class "bgcolor3 area" :valign "start" :style "padding-top: 0px;"
+        (box :orientation "v" :space-evenly false :valign "start" :style "padding-top: 0px;"
+            (box :class "header" 
+                (label :class "font_large font_color"  :style "padding-top: 10px;"  :text {WEATHER !="" ? WEATHER[0] : ""})
+                (label :class "font_large font_color"  :style "padding-top: 10px; " :text {WEATHER !="" ? WEATHER[2] : ""}) 
+            )
+            (box 
+                (label :class "font_small font_color" :text {WEATHER !="" ? WEATHER[1] : ""}) 
+            ))
+    ))
+
+(defwidget temperatur [] 
+    (box :class "bgcolor3 area_round2"
+        (image  :path img_weather :image-width 40)
+    ))
+
+(defwidget shutdown [] 
+    (box :class "bgcolor5 area"
+        (button :class "button_hover" :onclick "bspc wm -r & ${TOGGLE_SIDEBAR}"
+            (image :path img_refresh :image-width 40 :class "header_right"))
+        (button :class "button_hover" :onclick "shutdown now"
+            (image :path img_shutdown  :image-width 50))
+    ))
+
+
+(defwidget pcusage [] 
+	(box :class "bgcolor2 area" :vexpand "false" :hexpand "false" 
+		(box :orientation "h" :spacing 30 :halign "center" :valign "center" :space-evenly "false" :vexpand "false" :hexpand "false" 
+			(box :class "sys_bar" :orientation "v" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false" 
+                (scale :flipped true :min 0 :max 100 :orientation "v" :value {EWW_RAM.used_mem_perc} :active "true")
+                (image :image-width 50 :path img_memory))
+			(box :class "sys_bar" :orientation "v" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false" 
+				(scale :flipped true :min 0 :max 100 :value {EWW_CPU.avg} :orientation "v" :active "true")
+                (image :image-width 50 :path img_cpu))
+			)))
+
+(defwidget applauncher [] 
+    (box :class "bgcolor4 area" :orientation "v"
+        (button :class "button_hover" :onclick "kitty > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
+            (image :image-width 60 :path img_terminal)
+        )
+        (button :class "button_hover" :onclick "brave-beta > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
+            (image :image-width 60 :path img_brave)
+        )
+        (button :class "button_hover" :onclick "obsidian > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
+            (image :image-width 60 :path img_obsidian)
+        )
+        (button :class "button_hover" :onclick "spotify > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
+            (image :image-width 60 :path img_spotify)
+        )
+        (button :class "button_hover" :onclick "telegram-desktop > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
+            (image :image-width 60 :path img_telegram)
+        )
+        (button :class "button_hover" :onclick "discord > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR} "
+            (image :image-width 60 :path img_discord)
+        )
+    ))
+
+(defwidget activetime [] 
+    (box :class "bgcolor4 area" :orientation "v" :space-evenly false
+        (image :class "header" :path img_pc :image-width 50 :style "margin-bottom: 10px; padding-bottom: 10px;")
+        (label :class "font_large font_color "  :halign "fill" :text '${ACTIVEHOUR} hours')
+        (label :class "font_large font_color" :halign "fill" :text '${ACTIVEMIN} minutes')
+    ))
+
+;****WINDOWS****
+
+(defwindow folderview
+    :monitor 0
+    :geometry (geometry :x "430px"
+                        :y "420px"
+                        :width "300px"
+                        :height "480px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(folderview))
+
+(defwindow fortune
+    :monitor 0
+    :geometry (geometry :x "750px"
+                        :y "740px"
+                        :width "620px"
+                        :height "160px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(fortune))
+
+(defwindow music
+    :monitor 0
+    :geometry (geometry :x "430px"
+                        :y "180px"
+                        :width "300px"
+                        :height "220px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(music))
+
+(defwindow search
+    :monitor 0
+    :geometry (geometry :x "750px"
+                        :y "180px"
+                        :width "100px"
+                        :height "100px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(search))
+
+(defwindow weather
+    :monitor 0
+    :geometry (geometry :x "870px"
+                        :y "180px"
+                        :width "260px"
+                        :height "100px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(weather))
+
+(defwindow temperatur
+    :monitor 0
+    :geometry (geometry :x "1150px"
+                        :y "180px"
+                        :width "100px"
+                        :height "100px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(temperatur))
+
+(defwindow shutdown
+    :monitor 0
+    :geometry (geometry :x "1390px"
+                        :y "180px"
+                        :width "200px"
+                        :height "100px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(shutdown))
+
+(defwindow applauncher
+    :monitor 0
+    :geometry (geometry :x "1270px"
+                        :y "180px"
+                        :width "100px"
+                        :height "540px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(applauncher))
+
+(defwindow pcusage
+    :monitor 0
+    :geometry (geometry :x "1390px"
+                        :y "520px"
+                        :width "200px"
+                        :height "380px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(pcusage))
+
+(defwindow activetime
+    :monitor 0
+    :geometry (geometry :x "1390px"
+                        :y "300px"
+                        :width "200px"
+                        :height "200px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(activetime))
+
+(defwindow bonsaiview
+    :monitor 0
+    :geometry (geometry :x "750px"
+                        :y "300px"
+                        :width "500px"
+                        :height "420px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(bonsaiview))

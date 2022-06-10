@@ -1,0 +1,161 @@
+@import "./color";
+
+/** Global *******************************************/
+*{
+	all: unset;
+	font-family: feather;
+	font-family: "JetBrains Mono";
+	color: #151515;
+}
+
+.font_color {
+	color: $fontcolor;
+}
+.font_large {
+	font-size : 24px;
+	font-weight : bold;
+}
+.font_small {
+	font-size : 16px;
+	font-weight : bold;
+}
+
+.area {
+	border-radius: 32px;
+	padding: 20px 10px 20px 10px;
+}
+.area_round1 {
+	border-radius: 40%;
+	padding: 20px 10px 20px 10px;
+}
+.area_round2 {
+	border-radius: 100px;
+	padding: 10px 10px 10px 10px;
+}
+
+/** Bar ***********************************/
+.dockbox {
+	background-color: rgba(233, 233, 233, 0.4);
+	border-bottom-right-radius: 30%;
+	border-bottom-left-radius: 30%;
+}
+/** Icons ***********************************/
+
+.workspace {
+	font-size : 16px;
+	padding: 0px 6px 0px 6px;
+	margin: 5px 0px 0px 0px;
+	font-weight : bold;
+}
+.active_workspace {
+	font-size : 16px;
+	background-color: rgba(23,65,80,0.2);
+	border-radius: 100%;
+	padding: 5px 6px 5px 6px;
+	margin: 5px 0px 0px 0px;
+	font-weight : bold;
+}
+
+.time {
+	font-size : 13px;
+	font-weight : bold;
+}
+
+/** System *************************************************/
+
+.icon_large {
+    background-repeat: no-repeat;
+	background-size: 24px;
+	min-height: 24px;
+	min-width: 24px;
+	margin: 8px 0px 0px 0px;
+}
+
+.infotext {
+	background-color: #bdbdbd;
+	border: 0px solid #161616;
+	border-radius: 16px;
+	font-size : 14px;
+	padding: 0px 5px 0px 5px;
+	margin: 10px 0px 10px 0px;
+	font-weight : bold;
+}
+
+.folder {
+	padding: 5px 0px 5px 0px;
+}
+
+.header {
+	border-bottom: 3px solid $accent;
+}
+.header_right {
+	border-right: 3px solid $accent;
+}
+
+.iconlauncher {
+	background-repeat: no-repeat;
+	background-size: 50px 50px;
+	background-position: center;
+}
+
+.iconlauncher, .folder, .button_hover{
+	&:hover {
+		background-color: $accent;
+		border-radius: 30px;
+	}
+}
+.round_button {
+	&:hover {
+		background-color: $accent;
+		border-radius: 100%;
+	}
+}
+.play {
+	border-radius: 100px;
+	padding: 2px 5px 2px 5px;
+
+}
+.sys_bar, scale trough {
+	all: unset;
+	background-color: $white;
+	border-radius: 16px;
+	min-height: 240px;
+	min-width: 28px;
+}
+.sys_bar, scale trough highlight {
+	all: unset;
+	border-radius: 16px;
+}
+.sys_bar scale trough highlight {
+	background-color: $accent;
+}
+
+.music_bar scale trough highlight {
+	all: unset;
+	background-color: $accent;
+	border-radius: 8px;
+}
+.music_bar scale trough {
+	all: unset;
+	background-color: $white;
+	border-radius: 16px;
+	min-height: 20px;
+	min-width: 250px;
+	margin : 10px 0px 0px 0px;
+}
+
+.progress {
+	min-height: 60px;
+	min-width: 50px;
+}
+
+.darkend {
+	background-color: rgba(0,0,0,0.7);
+}
+.lightend {
+	background-color: rgba(255, 255, 255, 0.7);
+}
+.music_progress {
+	min-width:40px;
+	min-height:260px;
+}

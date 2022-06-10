@@ -1,0 +1,30 @@
+
+$color0: #2bb4b4;
+$color1: #2bb4aa;
+$color2: #4fcaa2;
+$color3: #81dd91;
+$color4: #baed7f;
+$color5: #f9f871;
+$fontcolor: #333;
+$white: #ccc;
+$accent: rgba(245, 27, 74, 0.6);
+
+.bgcolor0 {
+	background-color: $color0;
+}
+.bgcolor1 {
+	background-color: $color1;
+}
+.bgcolor2 {
+	background-color: $color2;
+	color: $color2;
+}
+.bgcolor3 {
+	background-color: $color3;
+}
+.bgcolor4 {
+	background-color: $color4;
+}
+.bgcolor5 {
+	background-color: $color5;
+}

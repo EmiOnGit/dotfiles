@@ -10,4 +10,5 @@ function to_home {
 to_config "sxhkd"
 to_config "bspwm"
 to_config "kitty"
+to_config "eww"
 to_home ".xinitrc"

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# remove currently active window
+remove() {
+	wmctrl -c :ACTIVE:
+}
+fullscreen() {
+    wmctrl -r :ACTIVE: -b add,fullscreen
+}
+if [[ "$1" == "--rm" ]]; then
+	remove
+elif [[ "$1" == "--max" ]]; then
+	fullscreen
+fi

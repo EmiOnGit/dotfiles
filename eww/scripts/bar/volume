@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# Get Volume
+get_volume() {
+	
+	muted=`pactl get-sink-mute @DEFAULT_SINK@ | grep "no"`
+	if [[ -z "$muted" ]]; then
+		echo "-"
+		exit
+	fi 
+	volume=`pactl get-sink-volume @DEFAULT_SINK@ | grep -Eo [0-9]\?[0-9]\?[0-9]\% | head -n1 | sed 's/[^0-9]*//g'`
+
+	if [[ "$volume" == "0" ]]; then
+		echo "-"
+	else
+		echo "$volume"
+	fi
+}
+
+# Get icons
+get_icon() {
+	vol="$(get_volume)"
+	current="${vol%%%}"
+
+	if [[ "$current" -eq "0" ]]; then
+		echo "icons/player-volume.png"
+	elif [[ ("$current" -ge "0") && ("$current" -le "30") ]]; then
+		echo "icons/audio-volume-medium.png"
+	else
+		echo "icons/audio-volume-high.png"
+	fi
+
+}
+
+# Increase Volume
+inc_volume() {
+	vol="$(get_volume)"
+	current="${vol%%%}"
+
+	if [[ "$current" -eq "0" ]]; then
+		toggle_mute
+	fi
+
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
+}
+
+# Decrease Volume
+dec_volume() {
+	vol="$(get_volume)"
+	current="${vol%%%}"
+
+	if [[ "$current" -eq "0" ]] 
+	then
+		toggle_mute
+	fi
+
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
+}
+
+# Toggle Mute
+toggle_mute() {
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+}
+
+# Execute accordingly
+if [[ "$1" == "--get" ]]; then
+	get_volume
+elif [[ "$1" == "--icon" ]]; then
+	get_icon
+elif [[ "$1" == "--inc" ]]; then
+	inc_volume
+elif [[ "$1" == "--dec" ]]; then
+	dec_volume
+elif [[ "$1" == "--toggle" ]]; then
+	toggle_mute
+else
+	get_volume
+fi

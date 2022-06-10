@@ -17,7 +17,7 @@ if path[-2:] != "/*":
     path += "/*"
 
 children_paths=glob.glob(path) 
-children_names=[child.split("/")[-1].upper() for child in children_paths]
+children_names=[child.split("/")[-1] for child in children_paths]
 
 children = list(zip(children_names, children_paths))
 json_str=json.dumps(children)

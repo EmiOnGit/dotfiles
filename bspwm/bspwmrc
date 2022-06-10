@@ -2,7 +2,7 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 pgrep -x picom > /dev/null || picom &
-~/.config/eww/launch_bar &
+~/.config/eww/scripts/helper/launch_bar &
 feh --bg-fill ~/Downloads/wallpaper.png &
 
 bspc monitor DP-3 -d 😁     

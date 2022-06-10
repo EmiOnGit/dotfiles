@@ -4,7 +4,7 @@
 ;; ** Variables ***********************************************************************
 (defvar eww "eww -c $HOME/.config/eww")
 (defvar space 20)
-(defvar TOGGLE_SIDEBAR "./toggle_dashboard &")
+(defvar TOGGLE_SIDEBAR "scripts/helper/toggle_dashboard &")
 
 (defpoll TIME :interval "5s" `date +\'%I:%M %p\'`)
 (defpoll DATE :interval "5s" `date +\'%A, %B %d\'`)

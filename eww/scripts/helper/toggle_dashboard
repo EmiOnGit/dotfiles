@@ -11,6 +11,7 @@ fi
 
 ## Open widgets 
 run_eww() {
+	${EWW} open background
 	${EWW} open folderview
 	${EWW} open bonsaiview
 	${EWW} open fortune
@@ -39,4 +40,6 @@ else
 	${EWW} close pcusage
 	${EWW} close applauncher
 	${EWW} close activetime
+	${EWW} close background
+
 fi

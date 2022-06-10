@@ -1,9 +1,9 @@
 #! /bin/sh
 
 pgrep -x sxhkd > /dev/null || sxhkd &
-pgrep -x picom > /dev/null || picom &
+pgrep -x picom > /dev/null || picom --experimental-backends -b &
 ~/.config/eww/scripts/helper/launch_bar &
-feh --bg-fill ~/Downloads/wallpaper.png &
+feh --bg-fill ~/dotfiles/wallpaper.jpg &
 
 bspc monitor DP-3 -d 😁     
 bspc monitor HDMI-1 -d 🕮   

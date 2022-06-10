@@ -54,13 +54,12 @@
             (centerbox :height 15
                 (button :class "button_hover" :onclick "playerctl previous"
                     (image :class "play" :image-width 40 :image-height 40 :path "${img_play_prev}"))
-                (button :class "round_button" :onclick "playerctl play-pause"
-                    (image  :class "play lightend " :image-width 40 :image-height 40 :path  {SONGSTATUS == "Playing" ? img_pause : img_play}))
+                (button :class "button_hover" :onclick "playerctl play-pause"
+                    (image  :class "play " :image-width 40 :image-height 40 :path  {SONGSTATUS == "Playing" ? img_pause : img_play}))
                 (button :class "button_hover" :onclick "playerctl next"
-                    (image :image-width 40 :path "${img_play_next}"))
-            )
-                (box :class "music_bar"   :vexpand "false" :hexpand "false" 
-                    (scale :min 0 :max {SONGLENGTH ?: 1000000} :active false :value {SONGPOSITION ?: 0}))
+                    (image :image-width 40 :path "${img_play_next}")))
+            (box :class "music_bar"   :vexpand "false" :hexpand "false" 
+                (scale :min 0 :max {SONGLENGTH ?: 1000000} :active false :value {SONGPOSITION ?: 0}))
         )
     ))
 
@@ -135,12 +134,14 @@
         (label :class "font_large font_color "  :halign "fill" :text '${ACTIVEHOUR} hours')
         (label :class "font_large font_color" :halign "fill" :text '${ACTIVEMIN} minutes')
     ))
-
+(defwidget background [] 
+    (button :style "background-color: #000;":onclick "${TOGGLE_SIDEBAR}") 
+)
 ;****WINDOWS****
 
 (defwindow folderview
     :monitor 0
-    :geometry (geometry :x "430px"
+    :geometry (geometry :x "400px"
                         :y "420px"
                         :width "300px"
                         :height "480px"
@@ -152,7 +153,7 @@
 
 (defwindow fortune
     :monitor 0
-    :geometry (geometry :x "750px"
+    :geometry (geometry :x "720px"
                         :y "740px"
                         :width "620px"
                         :height "160px"
@@ -164,7 +165,7 @@
 
 (defwindow music
     :monitor 0
-    :geometry (geometry :x "430px"
+    :geometry (geometry :x "400px"
                         :y "180px"
                         :width "300px"
                         :height "220px"
@@ -176,7 +177,7 @@
 
 (defwindow search
     :monitor 0
-    :geometry (geometry :x "750px"
+    :geometry (geometry :x "720px"
                         :y "180px"
                         :width "100px"
                         :height "100px"
@@ -188,7 +189,7 @@
 
 (defwindow weather
     :monitor 0
-    :geometry (geometry :x "870px"
+    :geometry (geometry :x "840px"
                         :y "180px"
                         :width "260px"
                         :height "100px"
@@ -200,7 +201,7 @@
 
 (defwindow temperatur
     :monitor 0
-    :geometry (geometry :x "1150px"
+    :geometry (geometry :x "1120px"
                         :y "180px"
                         :width "100px"
                         :height "100px"
@@ -212,7 +213,7 @@
 
 (defwindow shutdown
     :monitor 0
-    :geometry (geometry :x "1390px"
+    :geometry (geometry :x "1360px"
                         :y "180px"
                         :width "200px"
                         :height "100px"
@@ -224,7 +225,7 @@
 
 (defwindow applauncher
     :monitor 0
-    :geometry (geometry :x "1270px"
+    :geometry (geometry :x "1240px"
                         :y "180px"
                         :width "100px"
                         :height "540px"
@@ -236,7 +237,7 @@
 
 (defwindow pcusage
     :monitor 0
-    :geometry (geometry :x "1390px"
+    :geometry (geometry :x "1360px"
                         :y "520px"
                         :width "200px"
                         :height "380px"
@@ -248,7 +249,7 @@
 
 (defwindow activetime
     :monitor 0
-    :geometry (geometry :x "1390px"
+    :geometry (geometry :x "1360px"
                         :y "300px"
                         :width "200px"
                         :height "200px"
@@ -260,7 +261,7 @@
 
 (defwindow bonsaiview
     :monitor 0
-    :geometry (geometry :x "750px"
+    :geometry (geometry :x "720px"
                         :y "300px"
                         :width "500px"
                         :height "420px"
@@ -269,3 +270,14 @@
     :windowtype "dock"
     :wm-ignore true
 (bonsaiview))
+(defwindow background
+    :monitor 0
+    :geometry (geometry :x "0px"
+                        :y "0px"
+                        :width "1920px"
+                        :height "1080px"
+                        :anchor "top left")
+    :stacking "bg"
+    :windowtype "normal"
+    :wm-ignore true
+(background))

@@ -23,12 +23,12 @@
 
 ;; workspaces
 (defwidget workspaces [] 
-		(box :class "dockbox" :style "padding: 0 10px 0 10px"
+		(box :class "dockbox bgcolor1" :style "blur: 20px; padding: 0 10px 0 10px"
             (literal :content WORKSPACES)))
 
 ;; clock
 (defwidget clock [] 
-		(box :class "dockbox"
+		(box :class "dockbox bgcolor0"
 			(box :orientation "v"  :valign "center" :halign "center" :space-evenly "false"
 				(label :class "time" :text TIME)
 				(label :class "time" :text DATE))
@@ -36,29 +36,29 @@
 
 ;;launcher
 (defwidget launcher []
-    (box :class "dockbox" 
+    (box :class "dockbox bgcolor2" 
         (button :halign "center" :class "icon_large" :onclick TOGGLE_SIDEBAR :style "background-image: url('${img_dashboard}');")))
 
 ;; system
 (defwidget system [] 
 		(box 
-			(box :class "dockbox" :space-evenly "true"   :halign "center" :spacing space :style "padding: 0 12px 0 16px"
+			(box :class "dockbox bgcolor3" :space-evenly "true"   :halign "center" :spacing space :style "padding: 0 12px 0 16px"
 				(button :onclick "scripts/bar/widget_apps --ml"
 					(box 
 						(box :style "background-image: url('${img_mail}');" :class "icon_large")
-                        (label :class "infotext" :halign "start" :text MAILS)
+                        (label :class "infotext lightend" :halign "start" :text MAILS)
                     ))
 				(button :onclick "scripts/bar/volume --inc"
                         :onmiddleclick "scripts/bar/volume --toggle"
                         :onrightclick "scripts/bar/volume --dec"
 					(box 
 						(image :image-width 24 :path {(VOLUME ?: 0) < 10 ? img_audio_low : (VOLUME < 60 ? img_audio_medium : img_audio_high) } )
-                        (label :class "infotext" :halign "start" :text VOLUME)
+                        (label :class "infotext lightend" :halign "start" :text VOLUME)
                     ))
             )))
 ;; controls
 (defwidget controls []
-    (box :class "dockbox"
+    (box :class "dockbox bgcolor4"
         (box  :spacing space  :halign "center" 
             (button :onclick "scripts/bar/window_controls --max" :style "background-image: url('${img_fullscreen}');" :class "icon_large")
             (button :onclick "scripts/bar/window_controls --rm"  :style "background-image: url('${img_close}');" :class "icon_large")

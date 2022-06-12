@@ -25,3 +25,5 @@
 (defvar img_pause "icons/dashboard/media-playback-pause.png")
 (defvar img_play_next "icons/dashboard/go-next.png")
 (defvar img_play_prev "icons/dashboard/go-previous.png")
+;****BONSAI****
+(defvar img_bonsai "dashboard/bonsai.png")

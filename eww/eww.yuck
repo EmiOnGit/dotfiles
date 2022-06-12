@@ -15,7 +15,6 @@
 (defpoll MAILS :interval "1m" `python scripts/bar/mails.py`)
 
 ;; Volume vars
-(defpoll VOLICON :interval "2s" `scripts/bar/volume --icon`)
 (defpoll VOLUME :interval "1s" `scripts/bar/volume --get`)
 
 

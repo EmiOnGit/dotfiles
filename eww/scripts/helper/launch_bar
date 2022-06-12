@@ -8,7 +8,7 @@ if [[ ! `pidof eww` ]]; then
 	${EWW} daemon
 	sleep 0.5
 fi
-
+# don't forget to change/add the the widgets you want to be displayed here
 run_eww() {
 	${EWW} --config "$CFG" open-many \
 		   clock \

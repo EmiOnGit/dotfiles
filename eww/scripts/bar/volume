@@ -17,20 +17,6 @@ get_volume() {
 	fi
 }
 
-# Get icons
-get_icon() {
-	vol="$(get_volume)"
-	current="${vol%%%}"
-
-	if [[ "$current" -eq "0" ]]; then
-		echo "icons/player-volume.png"
-	elif [[ ("$current" -ge "0") && ("$current" -le "30") ]]; then
-		echo "icons/audio-volume-medium.png"
-	else
-		echo "icons/audio-volume-high.png"
-	fi
-
-}
 
 # Increase Volume
 inc_volume() {
@@ -65,8 +51,6 @@ toggle_mute() {
 # Execute accordingly
 if [[ "$1" == "--get" ]]; then
 	get_volume
-elif [[ "$1" == "--icon" ]]; then
-	get_icon
 elif [[ "$1" == "--inc" ]]; then
 	inc_volume
 elif [[ "$1" == "--dec" ]]; then

@@ -56,7 +56,8 @@ let-env NU_PLUGIN_DIRS = [
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # let-env PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
-let-env DISPLAY = ":0"
+
+# just need to log in to run startx (might be not wanted)
 let no_xorg = (ps | where name =~ "Xorg" | empty? )
 if $no_xorg {
   bash startx

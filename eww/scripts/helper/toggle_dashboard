@@ -1,6 +1,5 @@
 #!/bin/bash
 
-##  and CMD
 EWW=`which eww`
 
 ## Run eww daemon if not running already
@@ -10,6 +9,7 @@ if [[ ! `pidof eww` ]]; then
 fi
 
 ## Open widgets 
+# don't forget to change/add the the widgets you want to be displayed here
 run_eww() {
 	${EWW} open background
 	${EWW} open folderview
@@ -26,6 +26,10 @@ run_eww() {
 }
 
 ## Launch or close widgets accordingly
+## currently very ugly solution. 
+## The script decides that the dashboard is not open 
+## if it cannot find the folderview widget 
+## !todo find a better solution
 if [[ -z `eww windows | grep *folderview` ]]; then
 	run_eww
 else

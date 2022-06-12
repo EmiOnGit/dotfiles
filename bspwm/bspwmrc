@@ -1,10 +1,15 @@
 #! /bin/sh
 
+# start sxhkd if not running already
 pgrep -x sxhkd > /dev/null || sxhkd &
+# start picom if not runnign already
 pgrep -x picom > /dev/null || picom --experimental-backends -b &
+# launches eww bar on top of the first monitor
 ~/.config/eww/scripts/helper/launch_bar &
+# sets wallpaper (!todo dotfiles doesn't have to be in home)
 feh --bg-fill ~/dotfiles/wallpaper.jpg &
 
+# sets workspaces
 bspc monitor DP-3 -d 😁     
 bspc monitor HDMI-1 -d 🕮   
 

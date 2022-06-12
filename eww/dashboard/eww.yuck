@@ -1,8 +1,5 @@
-
-;****BONSAI****
-(defvar img_bonsai "dashboard/bonsai.png")
-
 ;****WEATHER****
+; you can change marburg to the city you live in 
 (defpoll WEATHER :interval "5s" "python scripts/dashboard/weather.py Marburg" )
 
 ;****MUSIC****

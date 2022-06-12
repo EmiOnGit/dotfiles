@@ -9,6 +9,9 @@ I generally try to take a more general approach which works with different setup
 Running `setup.sh` will link the config files to the right places for programs to recognize them.
 (does not override if the directories already exist)
 
+![Desktop](./pictures/setup_background.png)
+![Terminal](./pictures/terminal.png)
+![dashboard](./pictures/dashboard.png)
 Wallpaper source: 
 https://wall.alphacoders.com/big.php?i=487879
 

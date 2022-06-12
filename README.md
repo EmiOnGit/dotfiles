@@ -13,11 +13,18 @@ Wallpaper source:
 https://wall.alphacoders.com/big.php?i=487879
 
 
-dependencies to get the exact same setup:
-- bspwm
-- sxhkd
-- feh
-- eww
-- python (3)
-- Fira Code Font
-for the specific dependencies of a program check the according readme
+dependencies to get the same setup:
+- [bspwm](https://github.com/baskerville/bspwm)
+- [sxhkd](https://github.com/baskerville/sxhkd)
+- [feh](https://feh.finalrewind.org/)
+- [eww](https://github.com/elkowar/eww)
+- [python (3)](https://www.python.org/)
+- [Fira Code Font](https://github.com/tonsky/FiraCode)
+
+on arch linux you can install these programs with:
+
+`pacman -S bspwm sxhkd feh python ttf-fira-code`
+
+for eww check the according [installation guide](https://elkowar.github.io/eww/)
+
+For any specific dependencies of a program check the according readme

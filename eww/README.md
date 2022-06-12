@@ -5,24 +5,19 @@ if you just copy my [eww](https://github.com/elkowar/eww) setup don't forget to 
 I start my bar with my window manager (as most likely you want to)
 for an example how to do that you might want to look in my `bspwm/bspwmrc`.
 
-
-# icons used:
+## icons used:
 from [papirus-icon-theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
 
-dependencies:
+## dependencies:
 - playerctl 
 - fortune
-- uptime
-- pactl
+- libpulse
 - wmctrl
 
-python packages: 
+for arch:
+`pacman -S playerctl fortune-mod libpulse wmctrl`
+## python packages: 
 - imaplib
-- json
-- subprocess
-- glob
-- sys
-- pathlib
+- glob2
+- pathlib (part of std >= 3.4)
 - python_weather
-- asyncio
-- warnings

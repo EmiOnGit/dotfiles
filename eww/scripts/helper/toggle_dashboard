@@ -13,7 +13,8 @@ fi
 run_eww() {
 	${EWW} open background
 	${EWW} open folderview
-	${EWW} open bonsaiview
+	${EWW} open manga
+	${EWW} open social_media
 	${EWW} open fortune
 	${EWW} open music
 	${EWW} open search
@@ -34,7 +35,8 @@ if [[ -z `eww windows | grep *folderview` ]]; then
 	run_eww
 else
 	${EWW} close folderview
-	${EWW} close bonsaiview
+	${EWW} close manga
+	${EWW} close social_media
 	${EWW} close fortune
 	${EWW} close music
 	${EWW} close search

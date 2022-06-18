@@ -1,0 +1,57 @@
+# Which sources to use. You can use several sources, it won't affect perfomance'
+use = ['manganelo']
+
+# Available options: pdf, cbz, zip, plain (just images)
+format = "pdf"
+
+# If false, then OS default reader will be used
+use_custom_reader = false
+custom_reader = "zathura"
+
+# Custom download path, can be either relative (to the pwd) or absolute
+download_path = '/home/emi/.config/mangal/manga/'
+
+# Fullscreen mode
+fullscreen = true
+
+# Input prompt icon
+prompt = "🔍"
+
+# Input placeholder
+placeholder = "What shall we look for?"
+
+# Selected chapter mark
+mark = "▼"
+
+# Search window title
+title = "Mangal"
+
+[sources]
+    [sources.manganelo]
+    # Base url
+    base = 'https://ww5.manganelo.tv'
+
+    # Search endpoint. Put %s where the query should be
+    search = 'https://ww5.manganelo.tv/search/%s'
+
+    # Selector of entry anchor (<a></a>) on search page
+    manga_anchor = '.search-story-item a.item-title'
+
+    # Selector of entry title on search page
+    manga_title = '.search-story-item a.item-title'
+
+    # Manga chapters anchors selector
+    chapter_anchor = 'li.a-h a.chapter-name'
+
+    # Manga chapters titles selector
+    chapter_title = 'li.a-h a.chapter-name'
+
+    # Reader page images selector
+    reader_page = '.container-chapter-reader img'
+    
+    # Random delay between requests
+    random_delay_ms = 500 # ms
+    
+    # Are chapters listed in reversed order on that source?
+    # reversed order -> from newest chapter to oldest
+    reversed_chapters_order = false

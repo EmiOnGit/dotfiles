@@ -2,8 +2,9 @@
 
 def create_left_prompt [] {
     let path_segment = ($env.PWD)
+    let path_arrow = "\n -->   "
 
-    $path_segment
+    $path_segment + $path_arrow
 }
 
 def create_right_prompt [] {
@@ -20,7 +21,7 @@ let-env PROMPT_COMMAND_RIGHT = { create_right_prompt }
 
 # The prompt indicators are environmental variables that represent
 # the state of the prompt
-let-env PROMPT_INDICATOR = { "-> " }
+let-env PROMPT_INDICATOR = { "😊 " }
 let-env PROMPT_INDICATOR_VI_INSERT = { ": " }
 let-env PROMPT_INDICATOR_VI_NORMAL = { "〉" }
 let-env PROMPT_MULTILINE_INDICATOR = { "::: " }
@@ -56,6 +57,9 @@ let-env NU_PLUGIN_DIRS = [
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # let-env PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
+
+let-env PATH = ($env.PATH | split row (char esep) | prepend '/home/emi/.local/bin')
+let-env EDITOR = 'nvim'
 
 # just need to log in to run startx (might be not wanted)
 let no_xorg = (ps | where name =~ "Xorg" | empty? )

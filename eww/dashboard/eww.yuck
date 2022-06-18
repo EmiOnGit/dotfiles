@@ -7,6 +7,8 @@
 (defpoll SONGLENGTH :interval "5s" `playerctl metadata --format "{{ mpris:length }}"`)
 (defpoll SONGSTATUS :interval "1s" `playerctl status`)
 (defpoll SONGTITLE :interval "1s" `playerctl metadata title`)
+(defpoll BONSAI :interval "2s" 'tree')
+(defpoll NEW_EPISODE :interval "10m" 'python scripts/dashboard/manga.py update')
 
 ;****VARS****;
 (defvar FOLDER "[]")
@@ -14,6 +16,7 @@
 (defpoll ACTIVEMIN :interval "10s" `uptime -p | awk  '{print $4}'`)
 (defpoll FORTUNE :interval "10m" `python scripts/dashboard/fortune.py`)
 (defvar TOGGLE_SIDEBAR "./toggle_dashboard &")
+(defvar READ_NEW_EPISODE 'python scripts/dashboard/manga.py read')
 
 ;****WIDGETS****;
 (defwidget folderview [] 
@@ -37,10 +40,25 @@
 
 (defwidget bonsaiview [] 
     (box :class "bgcolor2 area"
-    (image :class "darkend area_round1" :path "${img_bonsai}" :image-width 320 :image-height 320)))
-
+        ; (image :class "darkend area_round1" :path "${img_bonsai}" :image-width 320 :image-height 320)
+        (label :class "darkend area_round1 ansi" :text BONSAI)
+        (for row in BONSAI
+            (box
+                (for c in row
+                    (box :style {c[1]} {c[0]})
+                )
+            )
+        )
+    ))
+(defwidget manga [] 
+    (box :class "bgcolor2 area"
+        (button :onclick "${READ_NEW_EPISODE} & ${TOGGLE_SIDEBAR}" :class 'button_hover ${NEW_EPISODE == "True" ? "new_ep" : "no_new_ep"}'
+            (image  :image-width 150 :path img_luffy)))
+)
 (defwidget fortune [] 
-    (box :class "area bgcolor1" 
+    (box :class "area bgcolor1" :space-evenly false
+        (image  :image-width 50 :path img_quote)
+
         (label :class "font_color font_small" :wrap true :text FORTUNE)
     ))
 
@@ -105,6 +123,9 @@
 
 (defwidget applauncher [] 
     (box :class "bgcolor4 area" :orientation "v"
+        (button :class "button_hover" :onclick "brave-beta https://wiki.archlinux.org > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR} "
+            (image :image-width 60 :path img_tux)
+        )
         (button :class "button_hover" :onclick "kitty > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
             (image :image-width 60 :path img_terminal)
         )
@@ -117,14 +138,26 @@
         (button :class "button_hover" :onclick "spotify > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
             (image :image-width 60 :path img_spotify)
         )
-        (button :class "button_hover" :onclick "telegram-desktop > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
-            (image :image-width 60 :path img_telegram)
-        )
-        (button :class "button_hover" :onclick "discord > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR} "
-            (image :image-width 60 :path img_discord)
-        )
+       
     ))
-
+    (defwidget social_media [] 
+        (box :class "bgcolor4 area" :orientation "v"
+            (box :orientation "h"
+                (button :class "button_hover" :onclick "kitty --hold himalaya > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
+                    (image :image-width 60 :path img_email_icon)
+                )
+                (button :class "button_hover" :onclick "brave-beta https://web.whatsapp.com > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
+                    (image :image-width 60 :path img_whatsapp)
+                ))
+            (box :orientation "h"
+                (button :class "button_hover" :onclick "telegram-desktop > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR}"
+                    (image :image-width 60 :path img_telegram)
+                )
+                (button :class "button_hover" :onclick "discord > /dev/null 2> /dev/null & ${TOGGLE_SIDEBAR} "
+                    (image :image-width 60 :path img_discord)
+                ))
+            
+        ))
 (defwidget activetime [] 
     (box :class "bgcolor4 area" :orientation "v" :space-evenly false
         (image :class "header" :path img_pc :image-width 50 :style "margin-bottom: 10px; padding-bottom: 10px;")
@@ -256,17 +289,39 @@
     :wm-ignore true
 (activetime))
 
-(defwindow bonsaiview
+; (defwindow bonsaiview
+;     :monitor 0
+;     :geometry (geometry :x "720px"
+;                         :y "300px"
+;                         :width "500px"
+;                         :height "420px"
+;                         :anchor "top left")
+;     :stacking "fg"
+;     :windowtype "dock"
+;     :wm-ignore true
+; (bonsaiview))
+(defwindow manga
     :monitor 0
     :geometry (geometry :x "720px"
                         :y "300px"
-                        :width "500px"
-                        :height "420px"
+                        :width "200px"
+                        :height "200px"
                         :anchor "top left")
     :stacking "fg"
     :windowtype "dock"
     :wm-ignore true
-(bonsaiview))
+(manga))
+(defwindow social_media
+    :monitor 0
+    :geometry (geometry :x "720px"
+                        :y "520px"
+                        :width "200px"
+                        :height "200px"
+                        :anchor "top left")
+    :stacking "fg"
+    :windowtype "dock"
+    :wm-ignore true
+(social_media))
 (defwindow background
     :monitor 0
     :geometry (geometry :x "0px"

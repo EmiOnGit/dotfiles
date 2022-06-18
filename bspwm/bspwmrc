@@ -7,7 +7,7 @@ pgrep -x picom > /dev/null || picom --experimental-backends -b &
 # launches eww bar on top of the first monitor
 ~/.config/eww/scripts/helper/launch_bar &
 # sets wallpaper (!todo dotfiles doesn't have to be in home)
-feh --bg-fill ~/dotfiles/wallpaper.jpg &
+feh --bg-fill ~/dotfiles/pictures/wallpaper.jpg
 
 # sets workspaces
 bspc monitor DP-3 -d 😁     
@@ -25,3 +25,4 @@ bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+bspc rule -a lapce state=floating follow=on

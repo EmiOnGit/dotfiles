@@ -1,4 +1,13 @@
 # Nushell Config File
+  let color0 = "#2796aa"
+  let color1 = "#2bb4ad"
+  let color2 = "#4fcaa2"
+  let color3 = "#81dd91"
+  let color4 = "#baed7f"
+  let color5 = "#f9f871"
+  let fontcolor = "#333"
+  let white = "#ccc"
+  let accent = "#902550"
 
 module completions {
   # Custom completions for external commands (those outside of Nushell)
@@ -122,71 +131,73 @@ module completions {
 
 # Get just the extern definitions without the custom completion commands
 use completions *
+let-env LS_COLORS = (vivid generate gruvbox-dark-hard | str trim)
+
 
 # for more information on themes see
 # https://www.nushell.sh/book/coloring_and_theming.html
 let default_theme = {
     # color for nushell primitives
-    separator: white
-    leading_trailing_space_bg: { attr: n } # no fg, no bg, attr none effectively turns this off
-    header: green_bold
-    empty: blue
-    bool: white
-    int: white
-    filesize: white
-    duration: white
-    date: white
-    range: white
-    float: white
-    string: white
-    nothing: white
-    binary: white
-    cellpath: white
-    row_index: green_bold
-    record: white
-    list: white
-    block: white
-    hints: dark_gray
+    separator: $accent
+    leading_trailing_space_bg: $color5
+    header: $color5
+    empty: $color5
+    bool: $white
+    int: $white
+    filesize: $white
+    duration: $white
+    date: $white
+    range: $white
+    float: $white
+    string: $white
+    nothing: $white
+    binary: $white
+    cellpath: $white
+    row_index: $color2
+    record: $white
+    list: $white
+    block: $white
+    hints: $color1
 
     # shapes are used to change the cli syntax highlighting
-    shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: b}
-    shape_binary: purple_bold
-    shape_bool: light_cyan
-    shape_int: purple_bold
-    shape_float: purple_bold
-    shape_range: yellow_bold
-    shape_internalcall: cyan_bold
-    shape_external: cyan
-    shape_externalarg: green_bold
-    shape_literal: blue
-    shape_operator: yellow
-    shape_signature: green_bold
-    shape_string: green
-    shape_string_interpolation: cyan_bold
-    shape_datetime: cyan_bold
-    shape_list: cyan_bold
-    shape_table: blue_bold
-    shape_record: cyan_bold
-    shape_block: blue_bold
-    shape_filepath: cyan
-    shape_globpattern: cyan_bold
-    shape_variable: purple
-    shape_flag: blue_bold
-    shape_custom: green
-    shape_nothing: light_cyan
+    shape_garbage: $color5
+    shape_binary: $color5
+    shape_bool: $color5
+    shape_int: $color5
+    shape_float: $color5
+    shape_range: $color5
+    shape_internalcall: $color5
+    shape_external: $color5
+    shape_externalarg: $color5
+    shape_literal: $color5
+    shape_operator: $color5
+    shape_signature: $color5
+    shape_string: $color5
+    shape_string_interpolation: $color5
+    shape_datetime: $color5
+    shape_list: $color5
+    shape_table: $color5
+    shape_record: $color5
+    shape_block: $color5
+    shape_filepath: $color5
+    shape_globpattern: $color5
+    shape_variable: $color5
+    shape_flag: $color5
+    shape_custom: $color5
+    shape_nothing: $color5
 }
 
 # The default config record. This is where much of your global configuration is setup.
 let-env config = {
-  filesize_metric: false
+  filesize_metric: true
   table_mode: light # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
+  color_config: $default_theme
   use_ls_colors: true
   rm_always_trash: false
-  color_config: $default_theme
   use_grid_icons: true
   footer_mode: "25" # always, never, number_of_rows, auto
   quick_completions: true  # set this to false to prevent auto-selecting completions when only one remains
-  partial_completions: true  # set this to false to prevent partial filling of the prompt
+  partial_completions: false  # set this to false to prevent partial filling of the prompt
   completion_algorithm: "fuzzy"  # prefix, fuzzy
   animate_prompt: false # redraw the prompt every second
   float_precision: 2
@@ -197,8 +208,7 @@ let-env config = {
   max_history_size: 10000 # Session has to be reloaded for this to take effect
   sync_history_on_enter: true # Enable to share the history between multiple sessions, else you have to close the session to persist history to file
   shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
-  disable_table_indexes: false # set to true to remove the index column from tables
-  cd_with_abbreviations: true # set to true to allow you to do things like cd s/o/f and nushell expand it to cd some/other/folder
+  disable_table_indexes: true # set to true to remove the index column from tables
   case_sensitive_completions: false # set to true to enable case-sensitive completions
 
   hooks: {

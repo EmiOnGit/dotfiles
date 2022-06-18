@@ -9,6 +9,7 @@ super + Return
 # program launcher
 super + d
 	rofi -show drun
+
 super + w
 	brave-beta
 

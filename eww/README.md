@@ -7,6 +7,7 @@ for an example how to do that you might want to look in my `bspwm/bspwmrc`.
 
 ## icons used:
 from [papirus-icon-theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
+[luffy head](https://cipherpolfiles.tumblr.com/image/175211535566)
 
 ## mails:
 

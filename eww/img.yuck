@@ -16,6 +16,10 @@
 (defvar img_brave "icons/dashboard/brave.png")
 (defvar img_obsidian "icons/dashboard/obsidian.png")
 (defvar img_spotify "icons/dashboard/spotify.png")
+(defvar img_tux "icons/dashboard/tux.png")
+(defvar img_quote "icons/dashboard/format-text-blockquote.svg")
+(defvar img_whatsapp "icons/dashboard/whatsapp.png")
+(defvar img_email_icon "icons/dashboard/internet-mail.svg")
 (defvar img_telegram "icons/dashboard/telegram.png")
 (defvar img_discord "icons/dashboard/discord.png")
 (defvar img_memory "icons/dashboard/gnome-dev-memory.png")
@@ -25,5 +29,6 @@
 (defvar img_pause "icons/dashboard/media-playback-pause.png")
 (defvar img_play_next "icons/dashboard/go-next.png")
 (defvar img_play_prev "icons/dashboard/go-previous.png")
-;****BONSAI****
+
 (defvar img_bonsai "dashboard/bonsai.png")
+(defvar img_luffy "icons/dashboard/luffy.png")

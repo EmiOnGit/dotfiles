@@ -4,7 +4,7 @@
 ;; ** Variables ***********************************************************************
 (defvar eww "eww -c $HOME/.config/eww")
 (defvar space 20)
-(defvar TOGGLE_SIDEBAR "scripts/helper/toggle_dashboard &")
+(defvar TOGGLE_SIDEBAR_GLOBAL "scripts/helper/toggle_dashboard &")
 
 (defpoll TIME :interval "5s" `date +\'%I:%M %p\'`)
 (defpoll DATE :interval "5s" `date +\'%A, %B %d\'`)
@@ -12,7 +12,7 @@
 (defpoll WORKSPACES :interval "1s" `python scripts/bar/workspaces.py`)
 
 ;; Mail vars
-(defpoll MAILS :interval "1m" `python scripts/bar/mails.py`)
+;; (defpoll MAILS :interval "1m" `python scripts/bar/mails.py`)
 
 ;; Volume vars
 (defpoll VOLUME :interval "1s" `scripts/bar/volume --get`)
@@ -22,7 +22,7 @@
 
 ;; workspaces
 (defwidget workspaces [] 
-		(box :class "dockbox bgcolor1" :style "blur: 20px; padding: 0 10px 0 10px"
+		(box :class "dockbox bgcolor1" :style "padding: 0 10px 0 10px"
             (literal :content WORKSPACES)))
 
 ;; clock
@@ -36,7 +36,7 @@
 ;;launcher
 (defwidget launcher []
     (box :class "dockbox bgcolor2" 
-        (button :halign "center" :class "icon_large" :onclick TOGGLE_SIDEBAR :style "background-image: url('${img_dashboard}');")))
+        (button :halign "center" :class "icon_large" :onclick TOGGLE_SIDEBAR_GLOBAL :style "background-image: url('${img_dashboard}');")))
 
 ;; system
 (defwidget system [] 
@@ -45,7 +45,7 @@
 				(button :onclick "scripts/bar/widget_apps --ml"
 					(box 
 						(box :style "background-image: url('${img_mail}');" :class "icon_large")
-                        (label :class "infotext lightend" :halign "start" :text MAILS)
+                        ;;(label :class "infotext lightend" :halign "start" :text MAILS)
                     ))
 				(button :onclick "scripts/bar/volume --inc"
                         :onmiddleclick "scripts/bar/volume --toggle"
@@ -91,7 +91,9 @@
            :reserve (struts :distance "25px" :side "top")
            :windowtype "dock"
            :wm-ignore false
-(clock))
+;; (clock)
+(system)
+)
 
 ;; system
 (defwindow system
@@ -117,8 +119,8 @@
                         :anchor "top center")
     :stacking "fg"
     :reserve (struts :distance "25px" :side "top")
-    :windowtype "dock"
-    :wm-ignore false
+    :windowtype "toolbar"
+    :wm-ignore true
 (launcher))
 
 ;; window control

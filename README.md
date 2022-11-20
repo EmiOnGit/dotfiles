@@ -1,12 +1,11 @@
 # Dotfiles
+These are the config files I use for my Linux setup.
 
-These are my personal config files I use for my linux setup.
+I documented most of what I've done for the future me and possibly other people who want to take a look! :)
 
-I documented most of what I've done for the future me and possibly other people which wants take a look! :)
+I generally try to take a more general approach that works with different setups so if see something I could improve on I'd appreciate you to open an issue or make a short merge request!
 
-I generally try to take a more general approach which works with different setups so if see something I could improve on I'd appreciate you to open a Issue or make a short merge request!
-
-Running `setup.sh` will link the config files to the right places for programs to recognize them.
+Running `place_configs.sh` will link the config files to the right places for programs to recognize them.
 (does not override if the directories already exist)
 
 ![Desktop](./pictures/setup_background.png)
@@ -23,11 +22,15 @@ dependencies to get the same setup:
 - [eww](https://github.com/elkowar/eww)
 - [python (3)](https://www.python.org/)
 - [Fira Code Font](https://github.com/tonsky/FiraCode)
+- playerctl
+- fortune-mod
+- libpulse
+- wmctrl
 
-on arch linux you can install these programs with:
+on Arch Linux you can install these programs:
 
-`pacman -S bspwm sxhkd feh python ttf-fira-code`
+`pacman -S bspwm sxhkd feh python ttf-fira-code playerctl fortune-mod libpulse wmctrl`
 
-for eww check the according [installation guide](https://elkowar.github.io/eww/)
+for eww check the according to [installation guide](https://elkowar.github.io/eww/)](https://elkowar.github.io/eww/)
 
-For any specific dependencies of a program check the according readme
+For any specific dependencies of a program check the according readme 

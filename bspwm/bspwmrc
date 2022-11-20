@@ -1,16 +1,14 @@
-#! /bin/sh
+#!/usr/bin/bash
 
 # start sxhkd if not running already
 pgrep -x sxhkd > /dev/null || sxhkd &
 # start picom if not runnign already
-pgrep -x picom > /dev/null || picom --experimental-backends -b &
-# launches eww bar on top of the first monitor
-~/.config/eww/scripts/helper/launch_bar &
+pgrep -x picom > /dev/null || picom &
 # sets wallpaper (!todo dotfiles doesn't have to be in home)
 feh --bg-fill ~/dotfiles/pictures/wallpaper.jpg
 
 # sets workspaces
-bspc monitor DP-3 -d 😁     
+bspc monitor DP-2 -d 😁     
 bspc monitor HDMI-1 -d 🕮   
 
 bspc config border_width         2
@@ -23,6 +21,10 @@ bspc config gapless_monocle      true
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
+bspc rule -a eww state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a lapce state=floating follow=on
+
+# launches eww bar on top of the first monitor
+/home/emi/.config/eww/scripts/helper/launch_bar

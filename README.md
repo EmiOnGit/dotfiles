@@ -9,11 +9,11 @@ Running `place_configs.sh` will link the config files to the right places for pr
 (does not override if the directories already exist)
 
 ![Desktop](./pictures/setup_background.png)
-![Terminal](./pictures/terminal.png)
-![dashboard](./pictures/dashboard.png)
-Wallpaper source: 
-https://wall.alphacoders.com/big.php?i=487879
+<!-- ![Terminal](./pictures/terminal.png) -->
+<!-- ![dashboard](./pictures/dashboard.png) -->
 
+Wallpaper credit: 
+https://twitter.com/sh1m4da
 
 dependencies to get the same setup:
 - [bspwm](https://github.com/baskerville/bspwm)
@@ -31,6 +31,6 @@ on Arch Linux you can install these programs:
 
 `pacman -S bspwm sxhkd feh python ttf-fira-code playerctl fortune-mod libpulse wmctrl`
 
-for eww check the according to [installation guide](https://elkowar.github.io/eww/)](https://elkowar.github.io/eww/)
+For eww you can check out the according to [installation guide](https://elkowar.github.io/eww/)](https://elkowar.github.io/eww/)
 
 For any specific dependencies of a program check the according readme 

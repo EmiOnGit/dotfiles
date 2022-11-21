@@ -1,81 +1,77 @@
 @charset "UTF-8";
 
 @import "./color";
+$box_design_border: 2em 5em 2em 5em;
 
 /** Global *******************************************/
 *{
 	all: unset;
 	font-family: feather;
 	font-family: "JetBrains Mono";
-	color: #151515;
-}
+	color: $fontcolor;
+} 
 
 .font_color {
 	color: $fontcolor;
 }
 .font_large {
-	font-size : 24px;
+	font-size : 350%;
+}
+
+.font_medium {
+	font-size : 250%;
 	font-weight : bold;
 }
 .font_small {
-	font-size : 16px;
+	font-size : 160%;
 	font-weight : bold;
 }
 
-.area {
-	border-radius: 32px;
-	padding: 20px 10px 20px 10px;
-}
-.area_round1 {
-	border-radius: 40%;
-	padding: 20px 10px 20px 10px;
-}
-.area_round2 {
-	border-radius: 100px;
-	padding: 10px 10px 10px 10px;
+.controls_offset {
+	margin-top: -1em;
+	margin-bottom: -1em;
 }
 
-/** Bar ***********************************/
-.dockbox {
-	border-bottom-right-radius: 30%;
-	border-bottom-left-radius: 30%;
+.time_symbol {
+	color: $color3;
+	margin-bottom: -0.2em;
+	padding-left: 0.5em;
+}
+.time_inner_box {
+	margin: 0.6em;
+	padding: 1em;
+}
+.home {
+	padding-top: 0.2em;
+}
+
+.box_design {
+	border-radius: $box_design_border;
+}
+.inner_box {
+	border-bottom: 0.2em dashed;
+	border-left: 0.2em solid;
+	border-right: 0.2em dashed;
+	border-color: $color3;
 }
 /** Icons ***********************************/
-
+.symbol {
+	padding-top: 0.5em;
+}
 .workspace {
-	font-size : 16px;
-	padding: 0px 6px 0px 6px;
-	margin: 5px 0px 0px 0px;
-	font-weight : bold;
+	margin: 1em;
 }
 .active_workspace {
-	font-size : 16px;
-	background-color: rgba(23,65,80,0.2);
-	border-radius: 100%;
-	padding: 5px 6px 5px 6px;
-	margin: 5px 0px 0px 0px;
-	font-weight : bold;
-}
+	background-color: $color4;
+	border-radius: $box_design_border;
+	margin: 0.5em;
 
-.time {
-	font-size : 13px;
-	font-weight : bold;
 }
-
 
 /** System *************************************************/
 
-.icon_large {
-    background-repeat: no-repeat;
-	background-size: 24px;
-	min-height: 24px;
-	min-width: 24px;
-	margin: 8px 0px 0px 0px;
-}
 
 .infotext {
-	border-radius: 16px;
-	font-size : 14px;
 	padding: 0px 5px 0px 5px;
 	margin: 10px 0px 10px 0px;
 	font-weight : bold;
@@ -152,9 +148,7 @@
 .darkend {
 	background-color: rgba(0,0,0,0.7);
 }
-.lightend {
-	background-color: rgba(255, 255, 255, 0.7);
-}
+
 .music_progress {
 	min-width:40px;
 	min-height:260px;

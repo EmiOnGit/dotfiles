@@ -15,7 +15,7 @@
 (defpoll ACTIVEHOUR :interval "10s" `uptime -p | awk  '{print $2}'`)
 (defpoll ACTIVEMIN :interval "10s" `uptime -p | awk  '{print $4}'`)
 (defpoll FORTUNE :interval "10m" `python scripts/dashboard/fortune.py`)
-(defvar TOGGLE_SIDEBAR "./toggle_dashboard &")
+(defvar TOGGLE_SIDEBAR "scripts/helper/toggle_dashboard &")
 (defvar READ_NEW_EPISODE 'python scripts/dashboard/manga.py read')
 
 ;****WIDGETS****;
@@ -171,7 +171,7 @@
 
 (defwindow folderview
     :monitor 0
-    :geometry (geometry :x "400px"
+    :geometry (geometry :x "10%"
                         :y "420px"
                         :width "300px"
                         :height "480px"

@@ -5,13 +5,15 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 # start picom if not runnign already
 pgrep -x picom > /dev/null || picom &
 # sets wallpaper (!todo dotfiles doesn't have to be in home)
-feh --bg-fill ~/dotfiles/pictures/wallpaper.jpg
+feh --bg-fill $HOME/dotfiles/pictures/hngz1oa76du91.jpg &
+# launches eww bar on top of the first monitor
+pgrep -x eww > /dev/null || /home/emi/.config/eww/scripts/helper/launch_bar &
 
 # sets workspaces
-bspc monitor DP-2 -d 😁     
-bspc monitor HDMI-1 -d 🕮   
+bspc monitor DP-2 -d web code music
+bspc monitor HDMI-1 -d  docs rest
 
-bspc config border_width         2
+bspc config border_width         1
 bspc config window_gap          12
 
 bspc config split_ratio          0.52
@@ -26,5 +28,3 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a lapce state=floating follow=on
 
-# launches eww bar on top of the first monitor
-/home/emi/.config/eww/scripts/helper/launch_bar

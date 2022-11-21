@@ -8,6 +8,6 @@ for i, line in enumerate(out.split("\n")):
     splitted = line.split()
     is_active = splitted[1] == "*"
     name = splitted[-1]
-    css_class = "active_workspace" if is_active else "workspace" 
+    css_class = "active_workspace inner_box" if is_active else "workspace" 
     buttons.append("(button :onclick \"wmctrl -s " + str(i) + "\" :class \"" + css_class + "\" \"" + name + "\")")
 print(''.join(buttons) + ")")

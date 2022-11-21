@@ -3,19 +3,15 @@
 EWW=`which eww`
 CFG="$HOME/.config/eww"
 
-## Run eww daemon if not running already
-if [[ ! `pidof eww` ]]; then
-	${EWW} daemon
-	sleep 0.5
-fi
 # don't forget to change/add the the widgets you want to be displayed here
 run_eww() {
-	${EWW} --config "$CFG" open-many \
-		   clock \
+	${EWW} --restart --config "$CFG" open-many \
+		   date \
+		   time \
 		   workspaces \
 		   controls \
-		   system \
-		   launcher
+		   launcher \
+		   current_program
 }
 
 run_eww

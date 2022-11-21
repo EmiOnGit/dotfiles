@@ -8,8 +8,8 @@ I generally try to take a more general approach that works with different setups
 Running `place_configs.sh` will link the config files to the right places for programs to recognize them.
 (does not override if the directories already exist)
 
-![Desktop](./pictures/setup_background.png)
-<!-- ![Terminal](./pictures/terminal.png) -->
+![Action](./pictures/screenshot_action.png)
+![Standard](./pictures/screenshot_standard.png)
 <!-- ![dashboard](./pictures/dashboard.png) -->
 
 Wallpaper credit: 

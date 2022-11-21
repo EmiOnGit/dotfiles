@@ -1,33 +1,31 @@
 // the colors I in my bars. If you change them here they will be changed in all the widgets that use the according color
 // !todo find a way to integrate the color theme with pywall
-$color0: #2796aa;
-$color1: #2bb4ad;
-$color2: #4fcaa2;
-$color3: #81dd91;
-$color4: #baed7f;
-$color5: #f9f871;
-$fontcolor: #333;
+$color0: #52382b;
+$color1: #52382b;
+$color2: #725038;
+$color3: #f6e1d0;
+$color4: #52382b;
+$color5: #f95656;
+$fontcolor: #eee;
 $white: #ccc;
 $accent: rgba(245, 27, 74, 0.6);
 
-.bgdockbox {
-	background-color: rgba($white, 0.9);
-}
+
 .bgcolor0 {
-	background-color: rgba($color0, 0.9);
+	background-color: $color0;
 }
 .bgcolor1 {
-	background-color: rgba($color1, 0.9);
+	background-color: $color2;
 }
 .bgcolor2 {
-	background-color: rgba($color2, 0.9);
+	background-color: $color4;
 }
 .bgcolor3 {
-	background-color: rgba($color3, 0.9);
+	background-color: $color3;
 }
 .bgcolor4 {
-	background-color: rgba($color4, 0.9);
+	background-color: $color4;
 }
 .bgcolor5 {
-	background-color: rgba($color5, 0.9);
+	background-color: $white;
 }

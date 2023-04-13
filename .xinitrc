@@ -1,5 +1,5 @@
 #!/bin/sh
-
+setxkbmap -option compose:ralt # set compose key for german symbols
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 

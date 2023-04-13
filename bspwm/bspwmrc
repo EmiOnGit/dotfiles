@@ -5,9 +5,10 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 # start picom if not runnign already
 pgrep -x picom > /dev/null || picom &
 # sets wallpaper (!todo dotfiles doesn't have to be in home)
-feh --bg-fill $HOME/dotfiles/pictures/hngz1oa76du91.jpg &
+feh --bg-fill $HOME/dotfiles/pictures/hcratc012v4a1.jpg &
 # launches eww bar on top of the first monitor
-pgrep -x eww > /dev/null || /home/emi/.config/eww/scripts/helper/launch_bar &
+#pgrep -x eww > /dev/null || /home/emi/dotfiles/eww/scripts/helper/launch_bar &
+xrandr --output DP-2 --auto --output HDMI-1 --auto --left-of DP-2 &
 
 # sets workspaces
 bspc monitor DP-2 -d docs rest
@@ -25,6 +26,8 @@ bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a eww state=floating
 bspc rule -a Kupfer.py focus=on
+bspc rule -a eww desktop='1' follow=on
 bspc rule -a Screenkey manage=off
 bspc rule -a lapce state=floating follow=on
+bspc rule -a Zathura state=tiled
 

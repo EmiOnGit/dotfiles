@@ -1,0 +1,15 @@
+# includes the theme colors
+include ColorTheme.conf
+
+open_url_with brave-beta
+copy_on_select yes
+# basics
+enable_audio_bell no
+cursor_blink_interval 0
+# fonts: 
+font_family Fira Code 
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+font_size 20.0
+

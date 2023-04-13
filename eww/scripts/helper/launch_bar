@@ -7,7 +7,7 @@ CFG="$HOME/.config/eww"
 run_eww() {
 	${EWW} --restart --config "$CFG" open-many \
 		   date \
-		   time \
+		   clock \
 		   workspaces \
 		   controls \
 		   launcher \

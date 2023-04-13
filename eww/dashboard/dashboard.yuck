@@ -1,0 +1,65 @@
+
+(deflisten fooo `tail -F ~/e.txt`)
+(defpoll HOUR :interval "5m" `date +%H`)
+
+(defwidget dashboard []
+  (box :class "bgcolor big_outer_box_decoration bordercolor1" :orientation "v" :space-evenly "false"
+      (greeting)
+      (weather)
+    (label :text "hi it's me")
+  )
+)
+(defwidget weather []
+  (box :class "bgcolor3 rounded_box" :orientation "v"
+  (box :orientation "h" :class "bgcolor weather_box"
+  (label :class "font_large" :text "Marburg")
+  (label :class "font_large" :text "15C")
+      (box :class "bgcolor4 weather_circle" :halign "end"
+      (image :path "../icons/Zafiro-Icons-Dark/panel/16/stock_weather-sunny.svg" :image-width 100)
+      )))
+)
+(defwidget greeting []
+  (box :class "bgcolor3 rounded_box" :orientation "v"
+  (box :orientation "h" :class "bgcolor weather_box"
+    (label :class "font_large" :text {HOUR > 1 ? "dsa" : "asd"})
+      (box :class "bgcolor4 weather_circle" :halign "end"
+      (image :path "../icons/Zafiro-Icons-Dark/panel/16/stock_weather-sunny.svg" :image-width 100)
+      )))
+)
+(defwidget music []
+  (box :class "bgcolor3 rounded_box" :orientation "v"
+    (graph :value "${fooo[0]}"
+      :max 1
+      :time-range "10s"
+      :thickness 3
+      :height 50
+      )
+    (graph :value "${fooo[1]}"
+      :max 1
+      :time-range "10s"
+      :thickness 3
+      )
+    (graph :value "${fooo[2]}"
+      :max 1
+      :time-range "10s"
+      :thickness 3
+      )
+    (graph :value "${fooo[3]}"
+      :max 1
+      :time-range "10s"
+      :thickness 3
+      )
+    "${fooo[1]}")
+  )
+(defwindow dashboard
+  :monitor 0
+  :geometry (geometry :x "1%"
+                      :y "10%"
+                      :width "21%"
+                      :height "70%"
+                      :anchor "top left")
+  :stacking "fg"
+  :reserve (struts :distance "1%" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+(dashboard))

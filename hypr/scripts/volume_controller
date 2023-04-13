@@ -1,0 +1,39 @@
+#!/usr/bin/python
+import subprocess
+import json
+import argparse
+parser = argparse.ArgumentParser(description='Optional app description')
+
+parser.add_argument('--volume', type=int,
+                    help='The volume you want the application to be in percent e.g. 10, 40, ..')
+
+parser.add_argument('--toggle_mute', action="store_true",
+                    help='toggles if the current application is muted', default= False)
+
+parser.add_argument('--relative_volume', type=int,
+                    help='The volume you want the application to increase or decrease in percent e.g. 10, 40, -50..')
+args = parser.parse_args()
+sink_inputs = json.loads(subprocess.run(['pactl',"-f", "json", "list", "sink-inputs"], capture_output=True).stdout)
+active_window = json.loads(subprocess.run(["hyprctl", "-j", "activewindow"],capture_output=True, text=True).stdout)
+active_window_name = active_window["class"].lower()
+for sink_input in sink_inputs:
+    props = sink_input["properties"]
+    sink_node_name = props["node.name"].lower()
+    sink_app_name = props["application.name"].lower()
+    if sink_app_name in active_window_name \
+        or sink_node_name in active_window_name:
+            app_index = sink_input["index"]
+            if args.toggle_mute:
+                subprocess.run(['pactl','set-sink-input-mute', str(app_index), 'toggle'])
+                break
+            if args.relative_volume is not None:
+                if args.relative_volume >= 0:
+                    option="+" + str(args.relative_volume) + "%"
+                else:
+                    option=str(args.relative_volume) + "%"
+                subprocess.run(['pactl','set-sink-input-volume', str(app_index), option])
+                break
+            if args.volume is not None:
+                option = str(args.volume) + "%"
+                subprocess.run(['pactl','set-sink-input-volume', str(app_index), option])
+                break

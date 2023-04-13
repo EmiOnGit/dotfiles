@@ -1,51 +1,23 @@
 #!/bin/bash
 
 EWW=`which eww`
-
+LOCK_FILE="/tmp/dashboard.lock"
 ## Run eww daemon if not running already
 if [[ ! `pidof eww` ]]; then
 	${EWW} daemon
 	sleep 1
 fi
 
-## Open widgets 
-# don't forget to change/add the the widgets you want to be displayed here
-run_eww() {
-	${EWW} open background
-	${EWW} open folderview
-	${EWW} open manga
-	${EWW} open social_media
-	${EWW} open fortune
-	${EWW} open music
-	${EWW} open search
-	${EWW} open weather
-	${EWW} open temperatur
-	${EWW} open shutdown
-	${EWW} open pcusage
-	${EWW} open applauncher
-	${EWW} open activetime
-}
 
 ## Launch or close widgets accordingly
 ## currently very ugly solution. 
 ## The script decides that the dashboard is not open 
-## if it cannot find the folderview widget 
-## !todo find a better solution
-if [[ -z `eww windows | grep *folderview` ]]; then
-	run_eww
+## if it cannot find the dashboard widget 
+## !TODO find a better solution
+if [[ -f "$LOCK_FILE" ]]; then
+	eww close dashboard
+	rm "$LOCK_FILE"
 else
-	${EWW} close folderview
-	${EWW} close manga
-	${EWW} close social_media
-	${EWW} close fortune
-	${EWW} close music
-	${EWW} close search
-	${EWW} close weather
-	${EWW} close temperatur
-	${EWW} close shutdown
-	${EWW} close pcusage
-	${EWW} close applauncher
-	${EWW} close activetime
-	${EWW} close background
-
+	eww open dashboard
+	touch "$LOCK_FILE"
 fi
